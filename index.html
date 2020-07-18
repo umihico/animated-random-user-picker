@@ -1,0 +1,131 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="UTF-8">
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+<div id="app">
+    <v-container>
+        <v-row>
+            <v-col cols="3">
+                <v-img v-if="picked" :src="picked"></v-img>
+            </v-col>
+            <v-col cols="9">
+                <v-row>
+                    <v-col cols="1" v-for="path in paths" v-bind:key="path">
+                        <v-img :src="path"
+                               :gradient="(picked==path) ? 'to top right, rgba(100,115,201,.60), rgba(100,115,201,.60)' : ''"
+                        >
+                            <div class="fill-height bottom-gradient"></div>
+                        </v-img>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+        <v-btn @click="shuffle">シャッフル！</v-btn>
+        <v-btn @click="run">
+            <template v-if="moving">ストップ</template>
+            <template v-else>スタート</template>
+            ！
+        </v-btn>
+        <div style="max-width:500px">
+        </div>
+    </v-container>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            pos: 0,
+            picked: null,
+            moving: false,
+            paths: ["img/nigaoe_adam_smith.png",
+                "img/nigaoe_amakusa_shirou.png",
+                "img/nigaoe_amedeo_avogadro.png",
+                "img/nigaoe_andre-marie_ampere.png",
+                "img/nigaoe_ashikaga_takauji.png",
+                "img/nigaoe_ashikaga_yoshiteru.png",
+                "img/nigaoe_carolus_fridericus_gauss.png",
+                "img/nigaoe_copernicus.png",
+                "img/nigaoe_david_hume.png",
+                "img/nigaoe_dougen.png",
+                "img/nigaoe_francis_bacon.png",
+                "img/nigaoe_friedrich_engels.png",
+                "img/nigaoe_gabriel_faure.png",
+                "img/nigaoe_galileo.png",
+                "img/nigaoe_georg_ohm.png",
+                "img/nigaoe_george_berkeley.png",
+                "img/nigaoe_george_washington.png",
+                "img/nigaoe_hasegawa_heizou.png",
+                "img/nigaoe_hattori_hanzou.png",
+                "img/nigaoe_hector_berlioz.png",
+                "img/nigaoe_henri_bergson.png",
+                "img/nigaoe_ichijou_tennou.png",
+                "img/nigaoe_immanuel_kant.png",
+                "img/nigaoe_itagaki_taisuke.png",
+                "img/nigaoe_izumi_kyouka.png",
+                "img/nigaoe_john_fleming.png",
+                "img/nigaoe_john_locke.png",
+                "img/nigaoe_john_manjiro.png",
+                "img/nigaoe_josiah_conder.png",
+                "img/nigaoe_kitazato_shibasaburou.png",
+                "img/nigaoe_komura_jutarou.png",
+                "img/nigaoe_lovecraft.png",
+                "img/nigaoe_maeda_toshiie.png",
+                "img/nigaoe_michael_faraday.png",
+                "img/nigaoe_murata_shinpachi.png",
+                "img/nigaoe_mutsu_munemitsu.png",
+                "img/nigaoe_myouan_eisai.png",
+                "img/nigaoe_nakajima_nobori.png",
+                "img/nigaoe_napoleon_horse.png",
+                "img/nigaoe_nichiren_syounin.png",
+                "img/nigaoe_nitobe_inazou.png",
+                "img/nigaoe_oda_sakunosuke.png",
+                "img/nigaoe_ookuma_shigenobu.png",
+                "img/nigaoe_prokofiev.png",
+                "img/nigaoe_sakaguchi_ango.png",
+                "img/nigaoe_samurai_yasuke.png",
+                "img/nigaoe_schopenhauer.png",
+                "img/nigaoe_sessyu.png",
+                "img/nigaoe_shibata_katsuie.png",
+                "img/nigaoe_sogano_umako.png",
+                "img/nigaoe_sonken.png",
+                "img/nigaoe_sugawarano_michizane.png",
+                "img/nigaoe_syoumu_tennou.png",
+                "img/nigaoe_tokugawa_tsunayoshi.png",
+                "img/nigaoe_tokugawa_yoshimune.png",
+                "img/nigaoe_tsuda_umeko.png",
+                "img/nigaoe_ueno_hidesaburou_hachikou.png",
+                "img/nigaoe_ueno_hidesaburou_hachikou_douzou.png",
+                "img/nigaoe_yamaoka_tessyuu.png",
+            ]
+        },
+        methods: {
+            shuffle() {
+                this.paths = _.shuffle(this.paths)
+            },
+            run() {
+                this.moving = !this.moving
+            }
+        },
+        mounted() {
+            setInterval(function () {
+                if (this.moving) {
+                    this.pos += 1;
+                    if (!this.paths[this.pos]) {
+                        this.pos = 0
+                    }
+                    this.picked = this.paths[this.pos]
+                }
+            }.bind(this), 3)
+        }
+    })
+</script>
+</body>
+</html>
