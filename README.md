@@ -14,5 +14,5 @@ All example image copyrights belongs to www.irasutoya.com
 aws s3 mb s3://animated-random-user-picker # only once
 aws s3 website s3://animated-random-user-picker --index-document index.html # only once
 aws s3api put-bucket-policy --bucket animated-random-user-picker --policy file://policy.json # only once
-aws s3 sync . s3://animated-random-user-picker
+aws s3 sync . s3://animated-random-user-picker --exclude=.git/*
 ```
