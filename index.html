@@ -12,14 +12,20 @@
     <v-container>
         <p><a target="_blank" href="https://github.com/umihico/animated-random-user-picker">Github</a></p>
         <p><a target="_blank" href="https://qiita.com/umihico/items/7878dbaca57b21d2bfc0">Qiita</a></p>
+        <v-btn @click="shuffle">シャッフル！</v-btn>
+        <v-btn @click="run">
+            <template v-if="moving">ストップ</template>
+            <template v-else>スタート</template>
+            ！
+        </v-btn>
         <v-row>
-            <v-col cols="3">
-                <v-img v-if="picked" :src="picked"></v-img>
+            <v-col xl="3" lg="3" md="4" sm="3" cols="12">
+                <v-img max-height="200" contain v-if="picked" :src="picked"></v-img>
             </v-col>
-            <v-col cols="9">
+            <v-col xl="9" lg="9" md="8" sm="9" cols="12">
                 <v-row>
-                    <v-col cols="1" v-for="path in paths" v-bind:key="path">
-                        <v-img :src="path"
+                    <v-col xl="1" lg="1" md="2" sm="2" cols="2" v-for="path in paths" v-bind:key="path">
+                        <v-img contain :src="path" max-height="50"
                                :gradient="(picked==path) ? 'to top right, rgba(100,115,201,.60), rgba(100,115,201,.60)' : ''"
                         >
                             <div class="fill-height bottom-gradient"></div>
@@ -28,12 +34,6 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-btn @click="shuffle">シャッフル！</v-btn>
-        <v-btn @click="run">
-            <template v-if="moving">ストップ</template>
-            <template v-else>スタート</template>
-            ！
-        </v-btn>
         <div style="max-width:500px">
         </div>
     </v-container>
